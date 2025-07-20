@@ -1,103 +1,89 @@
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 
-import { useEffect, useRef, useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Smartphone, QrCode, Shield, CheckCircle, AlertTriangle, ArrowRight } from "lucide-react"
+import { useEffect, useRef, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Smartphone,
+  QrCode,
+  Shield,
+  CheckCircle,
+  AlertTriangle,
+  ArrowRight,
+} from "lucide-react";
 
 const steps = [
   {
     number: 1,
-    title: "Attach Your Immutag",
-    description: "Place the NFC/QR code tag on your valuable device",
+    title: "Tag Your Device",
+    description:
+      "Attach a tamper-proof tag to your item, linking it to a secure NFT.",
     icon: QrCode,
     details: [
-      "Peel and stick the tamper-evident tag",
-      "Position on a flat, clean surface",
+      "Peel and stick the secure Immutag on your item",
       "Each tag contains a unique cryptographic identifier",
-      "Works with smartphones, laptops, tablets, and more",
+      "Tamper-evident and compatible with various device surfaces",
+      "Links directly to a blockchain NFT",
     ],
     image: "/placeholder.svg?height=300&width=400",
   },
   {
     number: 2,
-    title: "Register Your Device",
-    description: "Use our mobile app or web platform to create ownership record",
+    title: "Register Ownership",
+    description:
+      "Create a secure, verifiable ownership record on our platform.",
     icon: Smartphone,
     details: [
-      "Scan the tag with your phone camera",
-      "Enter device details and purchase information",
-      "Upload photos and documentation",
-      "Verify your identity securely",
+      "Scan the tag with your phone",
+      "Register device and ownership details",
+      "Upload proof of purchase and documentation",
+      "Your identity is protected yet verifiable",
     ],
     image: "/placeholder.svg?height=300&width=400",
   },
   {
     number: 3,
-    title: "Blockchain Verification",
-    description: "Your ownership is recorded immutably on the blockchain",
+    title: "Manage and Protect",
+    description:
+      "Enjoy full control — transfer, verify, or report stolen items easily.",
     icon: Shield,
     details: [
-      "Smart contract creates permanent ownership record",
-      "Cryptographic proof links you to your device",
-      "Decentralized network validates the transaction",
-      "Record cannot be altered or deleted",
+      "Prove ownership anytime, anywhere",
+      "Transfer ownership securely when selling or gifting",
+      "Instantly mark as lost or stolen",
+      "Notifies our global network to help prevent resale",
     ],
     image: "/placeholder.svg?height=300&width=400",
   },
-  {
-    number: 4,
-    title: "Verify Anytime",
-    description: "Instantly prove ownership through your secure account",
-    icon: CheckCircle,
-    details: [
-      "Access your ownership certificate 24/7",
-      "Share verification with insurance companies",
-      "Generate proof for warranty claims",
-      "Transfer ownership when selling",
-    ],
-    image: "/placeholder.svg?height=300&width=400",
-  },
-  {
-    number: 5,
-    title: "Theft Protection",
-    description: "Flag stolen devices and prevent unauthorized resale",
-    icon: AlertTriangle,
-    details: [
-      "Mark device as stolen instantly",
-      "Alert network of verified retailers",
-      "Assist law enforcement with recovery",
-      "Prevent resale on major platforms",
-    ],
-    image: "/placeholder.svg?height=300&width=400",
-  },
-]
+];
 
 export default function HowItWorksPage() {
-  const [activeStep, setActiveStep] = useState(0)
-  const [visibleSteps, setVisibleSteps] = useState<number[]>([])
-  const pageRef = useRef<HTMLDivElement>(null)
+  const [activeStep, setActiveStep] = useState(0);
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = Number.parseInt(entry.target.getAttribute("data-step") || "0")
-            setVisibleSteps((prev) => [...prev, index])
+            const index = Number.parseInt(
+              entry.target.getAttribute("data-step") || "0"
+            );
+            setVisibleSteps((prev) => [...prev, index]);
           }
-        })
+        });
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
-    const stepElements = pageRef.current?.querySelectorAll("[data-step]")
-    stepElements?.forEach((element) => observer.observe(element))
+    const stepElements = pageRef.current?.querySelectorAll("[data-step]");
+    stepElements?.forEach((element) => observer.observe(element));
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div ref={pageRef} className="pt-16">
@@ -108,7 +94,8 @@ export default function HowItWorksPage() {
             How It Works
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-            Secure your valuable devices in 5 simple steps. Experience the future of digital ownership verification.
+            Secure your valuable devices in 5 simple steps. Experience the
+            future of digital ownership verification.
           </p>
         </div>
       </section>
@@ -119,7 +106,7 @@ export default function HowItWorksPage() {
           {/* Step Navigation */}
           <div className="flex flex-wrap justify-center gap-4 mb-16">
             {steps.map((step, index) => {
-              const Icon = step.icon
+              const Icon = step.icon;
               return (
                 <button
                   key={index}
@@ -132,15 +119,19 @@ export default function HowItWorksPage() {
                 >
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                      activeStep === index ? "bg-white text-blue-600" : "bg-blue-500/20 text-blue-400"
+                      activeStep === index
+                        ? "bg-white text-blue-600"
+                        : "bg-blue-500/20 text-blue-400"
                     }`}
                   >
                     {step.number}
                   </div>
                   <Icon className="h-5 w-5" />
-                  <span className="font-medium hidden sm:block">{step.title}</span>
+                  <span className="font-medium hidden sm:block">
+                    {step.title}
+                  </span>
                 </button>
-              )
+              );
             })}
           </div>
 
@@ -152,8 +143,12 @@ export default function HowItWorksPage() {
                   {steps[activeStep].number}
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-white mb-2">{steps[activeStep].title}</h2>
-                  <p className="text-xl text-gray-300">{steps[activeStep].description}</p>
+                  <h2 className="text-3xl font-bold text-white mb-2">
+                    {steps[activeStep].title}
+                  </h2>
+                  <p className="text-xl text-gray-300">
+                    {steps[activeStep].description}
+                  </p>
                 </div>
               </div>
 
@@ -211,23 +206,28 @@ export default function HowItWorksPage() {
       <section className="py-20 bg-gray-800/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Complete Process Overview</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+              Complete Process Overview
+            </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              See how all the steps work together to create a comprehensive ownership verification system.
+              See how all the steps work together to create a comprehensive
+              ownership verification system.
             </p>
           </div>
 
           <div className="space-y-8">
             {steps.map((step, index) => {
-              const Icon = step.icon
-              const isVisible = visibleSteps.includes(index)
+              const Icon = step.icon;
+              const isVisible = visibleSteps.includes(index);
 
               return (
                 <div
                   key={index}
                   data-step={index}
                   className={`transition-all duration-700 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
                   }`}
                   style={{ transitionDelay: `${index * 200}ms` }}
                 >
@@ -247,13 +247,22 @@ export default function HowItWorksPage() {
                         </div>
 
                         <div className="md:col-span-9">
-                          <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
-                          <p className="text-lg text-gray-300 mb-4">{step.description}</p>
+                          <h3 className="text-2xl font-bold text-white mb-3">
+                            {step.title}
+                          </h3>
+                          <p className="text-lg text-gray-300 mb-4">
+                            {step.description}
+                          </p>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {step.details.map((detail, detailIndex) => (
-                              <div key={detailIndex} className="flex items-start space-x-2">
+                              <div
+                                key={detailIndex}
+                                className="flex items-start space-x-2"
+                              >
                                 <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                                <span className="text-sm text-gray-400">{detail}</span>
+                                <span className="text-sm text-gray-400">
+                                  {detail}
+                                </span>
                               </div>
                             ))}
                           </div>
@@ -268,19 +277,36 @@ export default function HowItWorksPage() {
                     </div>
                   )}
                 </div>
-              )
+              );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Technology Behind Immutag */}
+      <section className="py-20 bg-gray-800/30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+            Technology Behind Immutag
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Immutag utilises advanced blockchain technology, specifically NFTs,
+            ensuring all ownership data is immutable, transparent, yet
+            completely secure. Our infrastructure is built on robust
+            cryptographic standards, offering unparalleled security.
+          </p>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Secure Your Devices?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+            Ready to Secure Your Devices?
+          </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of users who trust Immutag to protect their valuable assets. Get started today and experience
-            peace of mind.
+            Join thousands of users who trust Immutag to protect their valuable
+            assets. Get started today and experience peace of mind.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -301,5 +327,5 @@ export default function HowItWorksPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

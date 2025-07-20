@@ -35,22 +35,22 @@ const values = [
   {
     icon: Target,
     title: "Mission-Driven",
-    description: "We believe in making ownership secure, transparent, and transferable for everyone.",
+    description: "We empower individuals and businesses with clear, secure, and indisputable proof of ownership.",
   },
   {
     icon: Users,
-    title: "User-Centric",
-    description: "Every decision we make prioritizes user experience and security above all else.",
+    title: "Collaboration-Focused",
+    description: "We partner with manufacturers, insurers, and law enforcement to protect assets effectively.",
   },
   {
     icon: Lightbulb,
-    title: "Innovation First",
-    description: "We push the boundaries of blockchain technology to solve real-world problems.",
+    title: "Technologically Advanced",
+    description: "We combine blockchain innovation with physical tagging to secure ownership.",
   },
   {
     icon: Award,
-    title: "Excellence",
-    description: "We maintain the highest standards in security, reliability, and user satisfaction.",
+    title: "Trust & Transparency",
+    description: "We reduce fraud and disputes by making ownership verifiable and transferable.",
   },
 ]
 
@@ -86,13 +86,12 @@ export default function AboutPage() {
             About Immutag
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-            We're revolutionizing asset protection through blockchain technology, making ownership verification secure,
-            transparent, and accessible to everyone.
+            Revolutionizing ownership protection through blockchain and physical tagging. Immutag ensures your assets are secure, verifiable, and protected.
           </p>
         </div>
       </section>
 
-      {/* Mission Section */}
+      {/* Mission & Vision Section */}
       <section
         data-section="mission"
         className={`py-20 transition-all duration-1000 ${
@@ -104,31 +103,20 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Our Mission</h2>
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                Immutag was founded to solve a critical problem in our digital age: proving ownership of valuable assets
-                in a world where theft and fraud are increasingly sophisticated.
-              </p>
-              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                We believe that everyone deserves the peace of mind that comes with secure, verifiable proof of
-                ownership. Our blockchain-based solution eliminates the vulnerabilities of traditional paper receipts
-                and digital records.
+                At Immutag, our mission is to empower individuals and businesses by providing clear, secure, and indisputable proof of ownership for valuable items.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed">
-                By decentralizing asset control and giving users full power over their digital identities and physical
-                belongings, we're building a more secure future for everyone.
+                By combining advanced blockchain technology with physical tagging, we’re revolutionising how ownership is secured and verified.
               </p>
             </div>
             <div className="relative">
               <div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-3xl"></div>
               <Card className="relative bg-gray-800/50 border-blue-500/20">
-                <CardContent className="p-8">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-blue-400 mb-2">2024</div>
-                    <p className="text-gray-300 mb-4">Founded with a vision</p>
-                    <div className="text-2xl font-bold text-white mb-2">50K+</div>
-                    <p className="text-gray-300 mb-4">Devices protected</p>
-                    <div className="text-2xl font-bold text-white mb-2">99.9%</div>
-                    <p className="text-gray-300">Uptime guarantee</p>
-                  </div>
+                <CardContent className="p-8 text-center">
+                  <div className="text-4xl font-bold text-blue-400 mb-2">Our Vision</div>
+                  <p className="text-gray-300 leading-relaxed">
+                    A world where every valuable asset is protected, verifiable, and effortlessly transferable—reducing theft, fraud, and disputes over ownership.
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -147,7 +135,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Our Values</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              These core principles guide everything we do, from product development to customer support.
+              Core principles that guide everything we build—security, trust, innovation, and collaboration.
             </p>
           </div>
 
@@ -184,10 +172,9 @@ export default function AboutPage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Meet Our Team</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Our Team</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our diverse team of blockchain developers, cybersecurity experts, and tech entrepreneurs is united by a
-              common goal: stopping theft and fraud in the personal electronics industry.
+              Led by blockchain experts, security specialists, and technology entrepreneurs, our team is focused on creating secure, user-friendly solutions that protect what matters most.
             </p>
           </div>
 
@@ -216,7 +203,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* Founding Section */}
       <section
         data-section="story"
         className={`py-20 bg-gradient-to-r from-blue-600/10 to-blue-800/10 transition-all duration-1000 ${
@@ -224,21 +211,16 @@ export default function AboutPage() {
         }`}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">Our Founding Story</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">Who We Are</h2>
           <div className="text-lg text-gray-300 leading-relaxed space-y-6">
             <p>
-              The idea for Immutag was born when our founder Sarah Chen had her laptop stolen and struggled to prove
-              ownership to insurance companies and law enforcement. Despite having receipts and photos, the process was
-              lengthy and frustrating.
+              Immutag began as LOX Network and evolved into a leading provider of blockchain-based verification solutions.
             </p>
             <p>
-              This experience highlighted a fundamental flaw in how we prove ownership of our most valuable possessions.
-              Traditional methods are easily forged, lost, or disputed. We knew there had to be a better way.
+              We collaborate with manufacturers, insurers, network providers, and law enforcement to ensure that every asset registered with us is secure and verifiable.
             </p>
             <p>
-              Combining Sarah's expertise in blockchain technology with Marcus's development skills, we set out to
-              create an immutable, verifiable system for asset ownership. Today, Immutag protects thousands of devices
-              worldwide, and we're just getting started.
+              Our commitment is to create a more secure world—one asset at a time.
             </p>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import ParallaxProviderWrapper from "@/components/ParallexProviderWrapper"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -24,9 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-gray-900 text-white overflow-x-hidden`}>
+      <ParallaxProviderWrapper>
         <Navigation />
         <main className="min-h-screen">{children}</main>
         <Footer />
+      </ParallaxProviderWrapper>
       </body>
     </html>
   )

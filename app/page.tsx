@@ -6,16 +6,20 @@ import { HowItWorksSection } from "@/components/home/how-it-works-section";
 import { SupportedDevicesSection } from "@/components/home/supported-devices-section";
 import { TrustSection } from "@/components/home/trust-section";
 import { EnhancedCTASection } from "@/components/home/enhanced-cta-section";
+import { PageTransition, ScrollProgressIndicator } from "@/components/page-transition";
 
 export default function HomePage() {
   return (
-    <div className="pt-16">
-      <HeroSection />
-      <HowItWorksSection />
-      <BenefitsSection />
-      <SupportedDevicesSection />
-      <TrustSection />
-      <EnhancedCTASection />
-    </div>
+    <PageTransition>
+      <ScrollProgressIndicator />
+      <div className="pt-16">
+        <HeroSection />
+        <HowItWorksSection />
+        <BenefitsSection />
+        <SupportedDevicesSection />
+        <TrustSection />
+        <EnhancedCTASection />
+      </div>
+    </PageTransition>
   );
 }

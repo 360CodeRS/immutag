@@ -1,213 +1,364 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Download, FileText, Shield, Zap, Globe, Lock } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Download, FileText, Globe, Lock, BookCopyIcon, ChartNoAxesGantt } from "lucide-react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 
 const sections = [
   {
     id: "overview",
-    title: "Executive Summary",
+    title: "Technical Overview",
     icon: FileText,
-    content: `Immutag represents a paradigm shift in asset ownership verification, leveraging blockchain technology to create immutable, verifiable proof of ownership for high-value personal electronics. Our solution addresses critical gaps in traditional ownership verification methods while providing a seamless user experience.`,
+    content: `Understand our blockchain-based verification system.\n\nImmutag represents a revolutionary approach to asset ownership verification, leveraging cutting-edge blockchain technology to create immutable, verifiable proof of ownership for high-value personal electronics and luxury goods.\n\nOur distributed ledger system ensures that every asset registered on the Immutag network receives a unique cryptographic fingerprint that cannot be replicated, altered, or falsified. This creates an unbreakable chain of custody from manufacturer to end consumer.\n\nThe system operates on a hybrid blockchain architecture, combining the security of public blockchain networks with the efficiency of private sidechains for optimal performance and cost-effectiveness.\n\nOur smart contract infrastructure automatically handles ownership transfers, warranty validations, and insurance claim verifications without requiring intermediaries or centralized authorities.`,
   },
   {
-    id: "technology",
-    title: "Technology Stack",
-    icon: Zap,
-    content: `Our platform utilizes a hybrid approach combining NFC/QR code physical tags with Ethereum-based smart contracts. The architecture ensures scalability, security, and interoperability while maintaining low transaction costs through Layer 2 solutions.`,
-  },
-  {
-    id: "integration",
-    title: "Digital Tag Integration",
-    icon: Shield,
-    content: `Each Immutag contains a unique cryptographic identifier that links physical assets to their blockchain records. The integration process involves secure key generation, device registration, and ownership attestation through our decentralized verification network.`,
-  },
-  {
-    id: "security",
-    title: "Security Architecture",
+    id: "token",
+    title: "Token Economics",
     icon: Lock,
-    content: `Our security model implements multiple layers of protection including cryptographic signatures, multi-factor authentication, and decentralized consensus mechanisms. Privacy is maintained through zero-knowledge proofs while ensuring transparency for verification purposes.`,
+    content: `Detailed insights into our dual-token TAGX/IMTG ecosystem.\n\nThe Immutag ecosystem operates on a sophisticated dual-token model designed to optimize both utility and governance functions while ensuring long-term economic sustainability.\n\nTAGX serves as the primary utility token, powering all network transactions including device registration, ownership transfers, verification requests, and premium feature access. Token holders can stake TAGX to earn rewards while contributing to network security through our Proof-of-Stake consensus mechanism.\n\nIMTG functions as the governance token, granting holders voting rights in the Immutag DAO. This includes decisions on protocol upgrades, fee structures, treasury allocations, and strategic partnerships. IMTG holders also receive priority access to new features and exclusive ecosystem benefits.\n\nOur tokenomics model incorporates deflationary mechanisms through quarterly token burns based on network usage, ensuring scarcity and value appreciation over time. Additionally, a portion of transaction fees is distributed to long-term stakers as passive income.\n\nThe initial token distribution allocates 40% to public sales, 25% to ecosystem development, 20% to the team and advisors (with 3-year vesting), 10% to strategic partnerships, and 5% to liquidity provisions across major exchanges.`,
   },
   {
-    id: "governance",
-    title: "Decentralized Governance",
+    id: "usecases",
+    title: "Use Cases",
     icon: Globe,
-    content: `The Immutag ecosystem will transition to a DAO model, allowing token holders to participate in protocol governance, fee structures, and feature development. This ensures community-driven evolution and long-term sustainability.`,
+    content: `Real-world scenarios demonstrating the Immutag solution.\n\nLuxury Goods Authentication: High-end fashion brands integrate Immutag chips into their products, allowing customers to instantly verify authenticity through our mobile app. This eliminates counterfeit goods and protects brand reputation while providing consumers with confidence in their purchases.\n\nInsurance Claim Processing: When a tagged device is damaged, stolen, or lost, the blockchain record provides irrefutable proof of ownership and purchase details. Insurance companies can process claims 90% faster with reduced fraud risk, leading to lower premiums for consumers.\n\nSecondary Market Trading: Buyers in secondary markets can verify the authenticity and ownership history of expensive electronics, watches, or collectibles instantly. This increases trust and liquidity in peer-to-peer transactions while reducing the risk of purchasing stolen goods.\n\nWarranty Management: Manufacturers can automate warranty validations through smart contracts, eliminating paperwork and reducing processing time from weeks to minutes. Consumers enjoy seamless warranty claims without needing to locate physical receipts or proof of purchase.\n\nSupply Chain Transparency: From production to retail, every step of a product's journey is recorded on the blockchain, providing complete traceability and accountability. This helps brands comply with regulatory requirements and meet consumer demands for ethical sourcing.\n\nCorporate Asset Management: Businesses can track and manage their expensive equipment, ensuring proper allocation, maintenance schedules, and theft prevention. The system provides real-time visibility into asset locations and usage patterns.`,
   },
-]
+  {
+    id: "roadmap",
+    title: "Strategic Roadmap",
+    icon: ChartNoAxesGantt,
+    content: `Milestones, future development, and expansion plans. \n\nImmutag's strategic roadmap outlines our vision for the next 3 years, focusing on technology enhancements, ecosystem growth, and global market expansion.\n\nQ1 2024: Launch of Immutag v2.0 with enhanced security features, expanded device compatibility, and integration with major insurance providers. Begin partnerships with luxury brands for pilot programs.\n\nQ3 2024: Initiate public token sale for TAGX and IMTG tokens to fund ecosystem development. Expand mobile app capabilities with AI-driven asset management features.\n\n2025: Launch Immutag DAO to decentralize governance and empower community participation in decision-making. Introduce advanced analytics tools for businesses to gain insights from asset data.\n\n2026: Expand globally into Europe and Asia-Pacific markets, establishing partnerships with local brands and insurance companies. Introduce new use cases in automotive and real estate sectors.\n\nOngoing: Continuous improvements to blockchain infrastructure, user experience enhancements, and community engagement initiatives to drive adoption and network effects.`,
+  }
+];
 
 export default function WhitepaperPage() {
-  const [activeSection, setActiveSection] = useState("overview")
+  const [activeSection, setActiveSection] = useState("overview");
+  const { scrollYProgress } = useScroll();
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
 
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8 flex justify-center">
-            <FileText className="h-16 w-16 text-blue-400" />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
-            Whitepaper
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Comprehensive technical documentation of Immutag's blockchain-based ownership verification system.
-          </p>
-          <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+      <section className="relative py-20 overflow-hidden min-h-screen flex items-center">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
           >
-            <Download className="mr-2 h-5 w-5" />
-            Download Full Whitepaper
-          </Button>
+            <source src="/images/particles.mp4" type="video/mp4" />
+          </video>
+          {/* Enhanced Overlay for Better Text Readability */}
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 via-blue-900/30 to-gray-900/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+
         </div>
+
+        <motion.div
+          style={{ y: heroY, scale: heroScale }}
+          className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8 flex justify-center"
+          >
+            <div className="p-4 bg-blue-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
+              <BookCopyIcon className="h-12 w-12 text-blue-400 drop-shadow-lg" />
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent drop-shadow-2xl"
+          >
+            Whitepaper
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-8 p-6 bg-black/40 backdrop-blur-md rounded-2xl border border-white/10"
+          >
+            <p className="text-xl text-white mb-0 leading-relaxed font-medium">
+              Our whitepaper provides an in-depth look into Immutag's technology,
+              tokenomics, business model, and strategic roadmap. It outlines how
+              we're transforming asset ownership, tracking, and verification
+              through blockchain innovation.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-blue-500/25 border border-blue-400/30"
+            >
+              <Download className="mr-2 h-5 w-5" />
+              Download Full Whitepaper
+            </Button>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Content Section */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Navigation Sidebar */}
-            <div className="lg:col-span-1">
-              <Card className="bg-gray-900/50 border-blue-500/20 sticky top-24">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="lg:col-span-1"
+            >
+              <Card className="bg-gray-900/50 border-blue-500/20 sticky top-24 backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-white">Table of Contents</CardTitle>
+                  <CardTitle className="text-white">What You'll Discover</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {sections.map((section) => {
-                    const Icon = section.icon
+                  {sections.map((section, index) => {
+                    const Icon = section.icon;
                     return (
-                      <button
+                      <motion.button
                         key={section.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => setActiveSection(section.id)}
-                        className={`w-full text-left p-3 rounded-lg transition-all duration-200 flex items-center space-x-3 ${
-                          activeSection === section.id
-                            ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                            : "text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                        }`}
+                        className={`w-full text-left p-3 rounded-lg transition-all duration-200 flex items-center space-x-3 border ${activeSection === section.id
+                          ? "bg-blue-600/20 text-blue-400 border-blue-500/30 shadow-lg shadow-blue-500/20"
+                          : "text-gray-300 hover:bg-gray-800/50 hover:text-white border-transparent"
+                          }`}
                       >
                         <Icon className="h-4 w-4" />
                         <span className="text-sm font-medium">{section.title}</span>
-                      </button>
-                    )
+                      </motion.button>
+                    );
                   })}
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Main Content */}
-            <div className="lg:col-span-3">
-              <Card className="bg-gray-900/50 border-blue-500/20">
-                <CardContent className="p-8">
-                  {sections.map((section) => {
-                    const Icon = section.icon
-                    return (
-                      <div
-                        key={section.id}
-                        className={`transition-all duration-500 ${activeSection === section.id ? "block" : "hidden"}`}
-                      >
-                        <div className="flex items-center space-x-3 mb-6">
-                          <div className="p-2 bg-blue-500/10 rounded-lg">
-                            <Icon className="h-6 w-6 text-blue-400" />
-                          </div>
-                          <h2 className="text-2xl md:text-3xl font-bold text-white">{section.title}</h2>
-                        </div>
-                        <div className="prose prose-lg prose-invert max-w-none">
-                          <p className="text-gray-300 leading-relaxed mb-6">{section.content}</p>
-
-                          {/* Additional detailed content based on section */}
-                          {section.id === "overview" && (
-                            <div className="space-y-4">
-                              <h3 className="text-xl font-semibold text-white">Key Benefits</h3>
-                              <ul className="list-disc list-inside space-y-2 text-gray-300">
-                                <li>Immutable ownership records on blockchain</li>
-                                <li>Instant verification for insurance claims</li>
-                                <li>Global recognition and transferability</li>
-                                <li>Theft prevention and recovery assistance</li>
-                              </ul>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="lg:col-span-3 relative min-h-[420px]"
+            >
+              <Card className="bg-gray-900/50 border-blue-500/20 relative overflow-hidden backdrop-blur-sm">
+                <CardContent className="p-8 relative min-h-[400px] bg-gray-900/90 rounded-lg">
+                  <AnimatePresence mode="wait">
+                    {sections.map(
+                      (section) =>
+                        activeSection === section.id && (
+                          <motion.div
+                            key={section.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20, position: "absolute", top: 0, left: 0, right: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="absolute top-0 left-0 right-0"
+                          >
+                            <div className="flex items-center space-x-3 mb-6">
+                              <div className="p-2 bg-blue-500/10 rounded-lg">
+                                <section.icon className="h-6 w-6 text-blue-400" />
+                              </div>
+                              <h2 className="text-2xl md:text-3xl font-bold text-white">{section.title}</h2>
                             </div>
-                          )}
 
-                          {section.id === "technology" && (
-                            <div className="space-y-4">
-                              <h3 className="text-xl font-semibold text-white">Core Components</h3>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="bg-gray-800/50 p-4 rounded-lg">
-                                  <h4 className="font-semibold text-blue-400 mb-2">Blockchain Layer</h4>
-                                  <p className="text-sm text-gray-300">Ethereum mainnet with Layer 2 scaling</p>
+                            {/* Section-Specific Content Blocks */}
+                            {section.id === "overview" && (
+                              <div className="space-y-4 mb-6">
+                                <div className="text-gray-300 leading-relaxed space-y-4">
+                                  {section.content.split("\n").map((line, index) => (
+                                    <p key={index}>{line.trim()}</p>
+                                  ))}
                                 </div>
-                                <div className="bg-gray-800/50 p-4 rounded-lg">
-                                  <h4 className="font-semibold text-blue-400 mb-2">Physical Tags</h4>
-                                  <p className="text-sm text-gray-300">NFC/QR codes with cryptographic security</p>
+                                <h3 className="text-xl font-semibold text-white">Key Benefits</h3>
+                                <ul className="list-disc list-inside space-y-2 text-gray-300">
+                                  <li>Immutable ownership records on blockchain</li>
+                                  <li>Instant verification for insurance claims</li>
+                                  <li>Global recognition and transferability</li>
+                                  <li>Theft prevention and recovery assistance</li>
+                                </ul>
+                              </div>
+                            )}
+
+                            {section.id === "token" && (
+                              <>
+                                <div className="space-y-4 mb-6">
+                                  <h3 className="text-xl font-semibold text-white">2 Core Tokens</h3>
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="bg-gray-800/50 p-4 rounded-lg">
+                                      <h4 className="font-semibold text-blue-400 mb-2">TAGX Token</h4>
+                                      <p className="text-sm text-gray-300">Used for staking, fees, and feature access.</p>
+                                    </div>
+                                    <div className="bg-gray-800/50 p-4 rounded-lg">
+                                      <h4 className="font-semibold text-blue-400 mb-2">IMTG Token</h4>
+                                      <p className="text-sm text-gray-300">Represents voting power in the DAO.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="text-gray-300 leading-relaxed space-y-4">
+                                  {section.content.split("\n").slice(3).map((line, index) => (
+                                    <p key={index}>{line.trim()}</p>
+                                  ))}
+                                </div>
+                              </>
+                            )}
+
+
+
+                            {section.id === "usecases" && (
+                              <div className="space-y-6">
+                                <div className="text-gray-300 leading-relaxed space-y-4">
+                                  {section.content.split("\n").slice(0, 1).map((line, index) => (
+                                    <p key={index} className="text-lg font-medium">{line.trim()}</p>
+                                  ))}
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  {[
+                                    { title: "Luxury Goods Authentication", desc: "Instant authenticity verification for high-end products" },
+                                    { title: "Insurance Claim Processing", desc: "90% faster claims with blockchain proof of ownership" },
+                                    { title: "Secondary Market Trading", desc: "Verified ownership history for peer-to-peer transactions" },
+                                    { title: "Warranty Management", desc: "Automated warranty validation through smart contracts" },
+                                    { title: "Supply Chain Transparency", desc: "Complete product journey tracking and accountability" },
+                                    { title: "Corporate Asset Management", desc: "Real-time equipment tracking and management" }
+                                  ].map((usecase, idx) => (
+                                    <div key={idx} className="bg-gray-800/50 p-4 rounded-lg border border-blue-500/20">
+                                      <h4 className="font-semibold text-blue-400 mb-2">{usecase.title}</h4>
+                                      <p className="text-sm text-gray-300">{usecase.desc}</p>
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="text-gray-300 leading-relaxed space-y-4">
+                                  {section.content.split("\n").slice(2).map((line, index) => (
+                                    <p key={index}>{line.trim()}</p>
+                                  ))}
                                 </div>
                               </div>
-                            </div>
-                          )}
-
-                          {section.id === "integration" && (
-                            <div className="space-y-4">
-                              <h3 className="text-xl font-semibold text-white">Integration Process</h3>
-                              <div className="space-y-3">
-                                <div className="flex items-start space-x-3">
-                                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                                    1
-                                  </div>
-                                  <p className="text-gray-300">Attach Immutag to device</p>
+                            )}
+                            {section.id === "roadmap" && (
+                              <div className="space-y-6">
+                                <div className="text-gray-300 leading-relaxed space-y-4">
+                                  {section.content.split("\n").slice(0, 1).map((line, index) => (
+                                    <p key={index} className="text-lg font-medium">{line.trim()}</p>
+                                  ))}
                                 </div>
-                                <div className="flex items-start space-x-3">
-                                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                                    2
-                                  </div>
-                                  <p className="text-gray-300">Register through mobile app or web platform</p>
-                                </div>
-                                <div className="flex items-start space-x-3">
-                                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                                    3
-                                  </div>
-                                  <p className="text-gray-300">Blockchain records ownership immutably</p>
-                                </div>
+                                <ul className="list-disc list-inside space-y-4 text-gray-300">
+                                  {[
+                                    "Q1 2024: Launch Immutag v2.0 with enhanced security features",
+                                    "Q3 2024: Public token sale for TAGX and IMTG tokens",
+                                    "2025: Launch Immutag DAO for decentralized governance",
+                                    "2026: Global expansion into Europe and Asia-Pacific markets",
+                                    "Ongoing: Continuous improvements to blockchain infrastructure"
+                                  ].map((milestone, idx) => (
+                                    <li key={idx}>{milestone}</li>
+                                  ))}
+                                </ul>
                               </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
+                            )}
+
+                          </motion.div>
+                        )
+                    )}
+                  </AnimatePresence>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Download CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-600/10 to-blue-800/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Get the Complete Whitepaper</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Download our comprehensive 40-page technical whitepaper for detailed specifications, architecture diagrams,
-            and implementation roadmap.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+      <section className="relative py-20 overflow-hidden">
+        {/* Background gradient with animation */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-blue-800/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-6 text-white"
+          >
+            Get the Complete Whitepaper
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+          >
+            Click the button below to download the latest version of the Immutag whitepaper. Discover how we're revolutionizing asset ownership and verification with blockchain technology.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Download className="mr-2 h-5 w-5" />
-              Download PDF (2.3 MB)
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-blue-500 text-blue-400 hover:bg-blue-500/10 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 bg-transparent"
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 shadow-xl shadow-blue-500/25 border border-blue-400/30"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download Whitepaper (2.3 MB)
+              </Button>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              View Online Version
-            </Button>
-          </div>
-        </div>
+
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
     </div>
-  )
+  );
 }

@@ -89,6 +89,7 @@ export function Navigation() {
                   key={title}
                   className="relative"
                   onMouseEnter={() => setHoveredMenu(title)}
+                  onMouseLeave={() => setHoveredMenu(null)}
                 >
                   <span className="flex items-center text-gray-300 hover:text-blue-400 font-medium transition duration-200 cursor-pointer">
                     {title} <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredMenu === title ? 'transform rotate-180' : ''}`} />
@@ -120,7 +121,8 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="absolute left-0 w-full mt-2"
+                className="absolute left-0 w-full"
+                onMouseEnter={() => setHoveredMenu(hoveredMenu)}
                 onMouseLeave={() => setHoveredMenu(null)}
               >
                 <div className="bg-gray-800/80 backdrop-blur-lg shadow-lg rounded-lg p-6">

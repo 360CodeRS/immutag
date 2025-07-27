@@ -65,7 +65,7 @@ export function Navigation() {
       </AnimatePresence>
       <nav
         className={`fixed top-0 w-full z-50 backdrop-blur-xl transition-all duration-300 ${scrolled
-          ? "bg-gray-900/80 border-b border-blue-500/20 shadow-md"
+          ? "bg-gray-900/80 shadow-md"
           : "bg-gray-900/30"
           }`}
         onMouseLeave={() => setHoveredMenu(null)}

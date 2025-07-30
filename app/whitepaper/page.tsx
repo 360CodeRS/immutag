@@ -42,7 +42,7 @@ export default function WhitepaperPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden min-h-screen flex items-center">
+      <section className="relative py-20 overflow-hidden flex items-center">
         {/* Video Background */}
         <div className="absolute inset-0 w-full h-full">
           <video

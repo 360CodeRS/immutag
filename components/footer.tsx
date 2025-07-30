@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <Image src="/images/immutag-logo.png" alt="Immutag" width={120} height={40} className="h-8 w-auto" />
+              <Image src="/images/immutag-logo.webp" alt="Immutag" width={120} height={40} className="h-8 w-auto" />
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
               Combining blockchain technology with physical tagging to give you irrefutable proof of ownership for your most valuable devices

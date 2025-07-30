@@ -39,19 +39,19 @@ export function SupportedDevicesSection() {
               icon: Laptop,
               label: "Laptops",
               color: "from-blue-400 to-violet-400",
-              image: "/images/laptop.png"
+              image: "/images/laptop.webp"
             },
             {
               icon: Bike,
               label: "E-bikes",
               color: "from-sky-400 to-emerald-400",
-              image: "/images/ebike.png"
+              image: "/images/ebike.webp"
             },
             {
               icon: Watch,
               label: "Smartwatches",
               color: "from-purple-400 to-blue-400",
-              image: "/images/smartwatch.png"
+              image: "/images/smartwatch.webp"
             }
           ].map((device, index) => (
             <motion.div

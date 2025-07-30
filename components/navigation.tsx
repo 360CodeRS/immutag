@@ -73,7 +73,7 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/images/immutag-logo.png" alt="Immutag" width={120} height={40} />
+              <Image src="/images/immutag-logo.webp" alt="Immutag" width={120} height={40} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -168,7 +168,7 @@ export function Navigation() {
               <div className="w-80 bg-gray-900/95 backdrop-blur-md border-l border-blue-500/20 flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b border-gray-700/50">
-                  <Image src="/images/immutag-logo.png" alt="Immutag" width={100} height={33} />
+                  <Image src="/images/immutag-logo.webp" alt="Immutag" width={100} height={33} />
                   <Button
                     variant="ghost"
                     size="icon"

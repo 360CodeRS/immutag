@@ -65,6 +65,7 @@ export default function HeroSection() {
           muted
           playsInline
           preload="auto"
+          
           src="/images/lock.mp4"
           className="w-full h-full object-cover opacity-90 md:opacity-80 -translate-x-8 md:-translate-x-32"
         />

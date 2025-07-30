@@ -94,7 +94,7 @@ export default function HowItWorksPage() {
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
-            initial={{ opacity: 0, y: -20 }}s
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
@@ -229,7 +229,7 @@ export default function HowItWorksPage() {
                     <Button
                       variant="outline"
                       onClick={() => setActiveStep(activeStep - 1)}
-                      className="border-blue-500 text-blue-400 hover:bg-blue-500/10"
+                      className="border-blue-500 text-blue-500 hover:bg-blue-500/10 hover:text-white"
                     >
                       Previous Step
                     </Button>

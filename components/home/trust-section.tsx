@@ -6,7 +6,7 @@ import { Shield, Lock, CheckCircle } from "lucide-react";
 export function TrustSection() {
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-cyan-950">
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-900 to-cyan-950">
         <motion.div
           className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-full blur-3xl"
           animate={{
@@ -29,14 +29,14 @@ export function TrustSection() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
               Trust in Technology
             </span>
           </h2>
           <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
-            We're building with <span className="text-purple-400 font-semibold">transparency</span>, 
-            <span className="text-cyan-400 font-semibold"> security</span>, and 
-            <span className="text-indigo-400 font-semibold"> compliance</span> at the core.
+            We're building with <span className="text-slate-50 font-semibold">Transparency</span>, 
+            <span className="text-cyan-400 font-semibold"> Security</span>, and 
+            <span className="text-indigo-400 font-semibold"> Compliance</span> at the core.
           </p>
           <motion.p 
             className="text-lg text-gray-400 mb-12"
@@ -93,7 +93,7 @@ export function TrustSection() {
                 </div>
                 
                 {/* Content */}
-                <h4 className="text-xl font-bold text-purple-300 mb-2 group-hover:text-purple-200 transition-colors">
+                <h4 className="text-xl font-bold text-slate-100 mb-2 group-hover:text-slate-200 transition-colors">
                   {feature.label}
                 </h4>
                 <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
@@ -102,7 +102,7 @@ export function TrustSection() {
 
                 {/* Accent line */}
                 <motion.div
-                  className={`mt-4 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto`}
+                  className={`mt-4 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mx-auto`}
                   initial={{ width: 0 }}
                   whileInView={{ width: "60%" }}
                   viewport={{ once: true }}

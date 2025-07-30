@@ -92,27 +92,25 @@ export default function HowItWorksPage() {
         </div>
 
         {/* Content */}
-     {/* Content */}
-<div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-  <motion.h1
-    initial={{ opacity: 0, y: -20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
-  >
-    How It Works
-  </motion.h1>
-  <motion.p
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.2, duration: 0.6 }}
-    className="text-xl md:text-2xl text-gray-300 leading-relaxed"
-  >
-    Secure your valuable devices in 3 simple steps. Experience the
-    future of digital ownership verification.
-  </motion.p>
-</div>
-
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}s
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
+          >
+            How It Works
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-xl md:text-2xl text-gray-300 leading-relaxed"
+          >
+            Secure your valuable devices in 3 simple steps. Experience the
+            future of digital ownership verification.
+          </motion.p>
+        </div>
       </section>
 
       {/* Steps Navigation */}

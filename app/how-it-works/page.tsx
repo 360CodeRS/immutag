@@ -3,12 +3,7 @@
 import React, { useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Smartphone,
-  QrCode,
-  Shield,
-  ArrowRight,
-} from "lucide-react";
+import { Smartphone, QrCode, Shield, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { EnhancedCTASection } from "@/components/home/enhanced-cta-section";
 import Lottie from "lottie-react";
@@ -66,30 +61,58 @@ export default function HowItWorksPage() {
   const [activeStep, setActiveStep] = useState(0);
   const pageRef = useRef(null);
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { margin: "0px 0px -20% 0px", once: true });
+  const isInView = useInView(sectionRef, {
+    margin: "0px 0px -20% 0px",
+    once: true,
+  });
 
   return (
-    <div ref={pageRef} className="pt-16 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
+    <div
+      ref={pageRef}
+      className="pt-16 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900"
+    >
       {/* Hero Section */}
-      <section className="py-20 text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
+
+      <section className="relative py-28 overflow-hidden flex items-center">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
           >
-            How It Works
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-xl md:text-2xl text-gray-300 leading-relaxed"
-          >
-            Secure your valuable devices in 3 simple steps. Experience the future of digital ownership verification.
-          </motion.p>
+            <source src="/images/how_it_works_bg.mp4" type="video/mp4" />
+          </video>
+          {/* Overlays for enhanced readability */}
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 via-blue-900/30 to-gray-900/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
         </div>
+
+        {/* Content */}
+     {/* Content */}
+<div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <motion.h1
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
+  >
+    How It Works
+  </motion.h1>
+  <motion.p
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.2, duration: 0.6 }}
+    className="text-xl md:text-2xl text-gray-300 leading-relaxed"
+  >
+    Secure your valuable devices in 3 simple steps. Experience the
+    future of digital ownership verification.
+  </motion.p>
+</div>
+
       </section>
 
       {/* Steps Navigation */}
@@ -112,22 +135,26 @@ export default function HowItWorksPage() {
                     key={index}
                     onClick={() => setActiveStep(index)}
                     className={`flex flex-col items-center min-w-[72px] px-4 py-2 rounded-xl transition-all duration-300
-                      ${isActive
-                        ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
-                        : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                      ${
+                        isActive
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
+                          : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
                       }`}
                   >
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold md:mb-1 mb-2
-                        ${isActive
-                          ? "bg-white text-blue-600"
-                          : "bg-blue-500/20 text-blue-400"
+                        ${
+                          isActive
+                            ? "bg-white text-blue-600"
+                            : "bg-blue-500/20 text-blue-400"
                         }`}
                     >
                       {step.number}
                     </div>
                     <Icon className="h-6 w-6 mb-1" />
-                    <span className="mt-1 text-xs font-medium text-center">{step.title}</span>
+                    <span className="mt-1 text-xs font-medium text-center">
+                      {step.title}
+                    </span>
                   </button>
                 );
               })}
@@ -143,22 +170,26 @@ export default function HowItWorksPage() {
                     key={index}
                     onClick={() => setActiveStep(index)}
                     className={`flex items-center space-x-3 px-6 py-3 rounded-full transition-all duration-300
-                      ${isActive
-                        ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
-                        : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                      ${
+                        isActive
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25"
+                          : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
                       }`}
                   >
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
-                        ${isActive
-                          ? "bg-white text-blue-600"
-                          : "bg-blue-500/20 text-blue-400"
+                        ${
+                          isActive
+                            ? "bg-white text-blue-600"
+                            : "bg-blue-500/20 text-blue-400"
                         }`}
                     >
                       {step.number}
                     </div>
                     <Icon className="h-5 w-5" />
-                    <span className="font-medium hidden sm:block">{step.title}</span>
+                    <span className="font-medium hidden sm:block">
+                      {step.title}
+                    </span>
                   </button>
                 );
               })}
@@ -228,7 +259,12 @@ export default function HowItWorksPage() {
               <div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-3xl"></div>
               <Card className="relative bg-gray-800/50 border-blue-500/20 overflow-hidden">
                 <CardContent className="p-4 flex items-center justify-center aspect-video">
-                  <Lottie animationData={steps[activeStep].animation} loop autoplay className="w-full h-full max-w-md" />
+                  <Lottie
+                    animationData={steps[activeStep].animation}
+                    loop
+                    autoplay
+                    className="w-full h-full max-w-md"
+                  />
                 </CardContent>
               </Card>
             </motion.div>
